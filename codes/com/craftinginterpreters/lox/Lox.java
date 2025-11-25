@@ -46,12 +46,12 @@ public class Lox {
         System.out.println("runPrompt");
     }
 
-    private static void run(Sttring source) {
+    private static void run(String source) {
         Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
 
         for(Token token : tokens){
-            System.out.pprintln(token);
+            System.out.println(token);
         }
     }
 
