@@ -78,10 +78,32 @@ class Scanner {
           line++;
           break;
         
+        case '"': string(); break;
+        
         default:
             Lox.error(line, "Unexpected character.");
             break;
     }
+  }
+
+  private void string() {
+    while (peek() != '"' && !isAtEnd()) {
+      if(peek() == '\n') line++;
+      advance();
+    }
+
+    //文字列が閉ざされてないエラー
+    if(isAtEnd()) {
+      Lox.error(line, "Unterminated string.");
+      return;
+    }
+
+    //文字列の終わり
+    advance();
+
+    //文字列を取り出す
+    String value = source.substring(start+1, current-1);
+    addToken(STRING, value);
   }
 
   private boolean match(char expected) {
